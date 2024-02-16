@@ -174,12 +174,6 @@ export const FormBazin: React.FC = () => {
                                   <Form.Item
                                     {...field}
                                     name={[field.name, "valor"]}
-                                    rules={[
-                                      {
-                                        required: true,
-                                        message: "Por favor, insira o valor!",
-                                      },
-                                    ]}
                                   >
                                     <Input
                                       tabIndex={-1}
@@ -188,6 +182,20 @@ export const FormBazin: React.FC = () => {
                                       placeholder="Percentual"
                                       suffix={"%"}
                                       onChange={(e) => {
+                                        const descricao = `Preço teto para receber DY de ${e.target.value}%`;
+                                        form.setFieldsValue({
+                                          precoTetoParams: [
+                                            ...form
+                                              .getFieldValue("precoTetoParams")
+                                              .map((item: any, index: any) =>
+                                                index === field.key
+                                                  ? { ...item, descricao }
+                                                  : item
+                                              ),
+                                          ],
+                                        });
+                                      }}
+                                      onBlur={(e) => {
                                         const descricao = `Preço teto para receber DY de ${e.target.value}%`;
                                         form.setFieldsValue({
                                           precoTetoParams: [
