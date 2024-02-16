@@ -73,10 +73,10 @@ const initialState = {
   cotacaoAtual: "",
   dividendoYieldMedio: "",
   precoTetoParams: [
-    { descricao: "Preço teto com DY de 10%", valor: "10" },
-    { descricao: "Preço teto com DY de 8%", valor: "8" },
-    { descricao: "Preço teto com DY de 7%", valor: "7" },
-    { descricao: "Preço teto com DY de 6%", valor: "6" },
+    { descricao: "Preço teto para receber DY de 10%", valor: "10" },
+    { descricao: "Preço teto para receber DY de 8%", valor: "8" },
+    { descricao: "Preço teto para receber DY de 7%", valor: "7" },
+    { descricao: "Preço teto para receber DY de 6%", valor: "6" },
   ], // Adiciona um item inicial vazio
 };
 
@@ -163,7 +163,11 @@ export const FormBazin: React.FC = () => {
                                       },
                                     ]}
                                   >
-                                    <Input placeholder="Descrição" disabled />
+                                    <Input
+                                      placeholder="Descrição"
+                                      disabled
+                                      tabIndex={-1}
+                                    />
                                   </Form.Item>
                                 </Col>
                                 <Col span={6}>
@@ -178,12 +182,13 @@ export const FormBazin: React.FC = () => {
                                     ]}
                                   >
                                     <Input
+                                      tabIndex={-1}
                                       type="number"
                                       step="1"
                                       placeholder="Percentual"
                                       suffix={"%"}
                                       onChange={(e) => {
-                                        const descricao = `Preço teto com DY de ${e.target.value}%`;
+                                        const descricao = `Preço teto para receber DY de ${e.target.value}%`;
                                         form.setFieldsValue({
                                           precoTetoParams: [
                                             ...form
@@ -201,6 +206,7 @@ export const FormBazin: React.FC = () => {
                                 </Col>
                                 <Col span={2}>
                                   <Button
+                                    tabIndex={-1}
                                     danger
                                     onClick={() => remove(field.name)}
                                   >
@@ -210,7 +216,12 @@ export const FormBazin: React.FC = () => {
                               </Row>
                             ))}
                             <Form.Item>
-                              <Button type="dashed" onClick={() => add()} block>
+                              <Button
+                                type="dashed"
+                                onClick={() => add()}
+                                block
+                                tabIndex={-1}
+                              >
                                 + Adicionar
                               </Button>
                             </Form.Item>
