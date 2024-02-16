@@ -94,12 +94,12 @@ export const FormBazin: React.FC = () => {
 
   return (
     <Row justify="center" style={{ padding: 8 }}>
-      <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+      <Col xs={24} sm={24} md={24} lg={16} xl={62}>
         <Row justify="center" gutter={[8, 8]}>
           <Col span={24}>
             <Card title={"Calculadora de Preço teto Bazin"}>
               <Row justify={"center"}>
-                <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                <Col xs={24} sm={24} md={24} lg={16} xl={16}>
                   <Form form={form} onFinish={onFinish} layout="vertical">
                     <Form.Item
                       tooltip="Valor atual do ativo."
