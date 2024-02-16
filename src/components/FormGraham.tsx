@@ -48,6 +48,7 @@ const tooltips = {
     empresa em relação a todo seu patrimônio.
     Cálculo: patrimônio líquido / número de
     ações em circulação`,
+  cotacao: `Valor atual do ativo.`,
 };
 
 const columns: ColumnsType<any> = [
@@ -92,6 +93,7 @@ export const FormGraham: React.FC = () => {
                 layout="vertical"
               >
                 <Form.Item
+                  tooltip={tooltips.cotacao}
                   name="cotacao"
                   label={"Cotação"}
                   rules={[
@@ -101,6 +103,7 @@ export const FormGraham: React.FC = () => {
                   <Input
                     type="number"
                     placeholder="Preço da ação, exemplo: 10,99"
+                    prefix="R$"
                   />
                 </Form.Item>
                 <Form.Item
