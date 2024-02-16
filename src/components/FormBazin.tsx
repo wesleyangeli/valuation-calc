@@ -102,6 +102,7 @@ export const FormBazin: React.FC = () => {
                 <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                   <Form form={form} onFinish={onFinish} layout="vertical">
                     <Form.Item
+                      tooltip="Valor atual do ativo."
                       label="Cotação Atual (R$)"
                       name="cotacaoAtual"
                       rules={[
@@ -120,7 +121,10 @@ export const FormBazin: React.FC = () => {
                     </Form.Item>
 
                     <Form.Item
-                      tooltip="This is a required field"
+                      tooltip="DY = Dividend Yield
+                      Mostra o rendimento obtido por uma ação
+                      através dos proventos distribuídos pela
+                      empresa."
                       label="Dividend Yield Médio (%)"
                       name="dividendoYieldMedio"
                       rules={[
@@ -138,7 +142,10 @@ export const FormBazin: React.FC = () => {
                       />
                     </Form.Item>
 
-                    <Form.Item label="Preço Teto Params">
+                    <Form.Item
+                      label="Lista de preço teto"
+                      tooltip="Adicione, altere ou delete o valor de preço teto na lista para calcular os valores."
+                    >
                       <Form.List name="precoTetoParams">
                         {(fields, { add, remove }) => (
                           <>
