@@ -89,7 +89,19 @@ export const FormBazin: React.FC = () => {
   }, [form]);
 
   const onFinish = (values: Entrada) => {
-    setData(bazin(values));
+    const newData = bazin(values);
+
+    const updatedParams = values.precoTetoParams.map((param) => ({
+      ...param,
+      descricao: `Preço teto para receber DY de ${param.valor}%`,
+    }));
+
+    setData(
+      newData.map((item, index) => ({
+        ...item,
+        descricao: updatedParams[index].descricao,
+      }))
+    );
   };
 
   return (
@@ -150,52 +162,24 @@ export const FormBazin: React.FC = () => {
                         {(fields, { add, remove }) => (
                           <>
                             {fields.map((field) => (
-                              <Row gutter={8} key={field.key}>
-                                <Col span={16}>
-                                  <Form.Item
-                                    {...field}
-                                    name={[field.name, "descricao"]}
-                                    rules={[
-                                      {
-                                        required: true,
-                                        message:
-                                          "Por favor, insira a descrição!",
-                                      },
-                                    ]}
-                                  >
-                                    <Input
-                                      placeholder="Descrição"
-                                      disabled
-                                      tabIndex={-1}
-                                    />
-                                  </Form.Item>
-                                </Col>
-                                <Col span={6}>
+                              <Row
+                                gutter={8}
+                                key={field.key}
+                                justify={"space-between"}
+                              >
+                                <Col span={22}>
                                   <Form.Item
                                     {...field}
                                     name={[field.name, "valor"]}
                                   >
                                     <Input
+                                      value={`Preço teto para receber DY de`}
                                       tabIndex={-1}
                                       type="number"
                                       step="1"
                                       placeholder="Percentual"
                                       suffix={"%"}
                                       onChange={(e) => {
-                                        const descricao = `Preço teto para receber DY de ${e.target.value}%`;
-                                        form.setFieldsValue({
-                                          precoTetoParams: [
-                                            ...form
-                                              .getFieldValue("precoTetoParams")
-                                              .map((item: any, index: any) =>
-                                                index === field.key
-                                                  ? { ...item, descricao }
-                                                  : item
-                                              ),
-                                          ],
-                                        });
-                                      }}
-                                      onBlur={(e) => {
                                         const descricao = `Preço teto para receber DY de ${e.target.value}%`;
                                         form.setFieldsValue({
                                           precoTetoParams: [
@@ -226,7 +210,13 @@ export const FormBazin: React.FC = () => {
                             <Form.Item>
                               <Button
                                 type="dashed"
-                                onClick={() => add()}
+                                onClick={() =>
+                                  add({
+                                    descricao: `Preço teto para receber DY de ${form.getFieldValue(
+                                      "dividendoYieldMedio"
+                                    )}%`,
+                                  })
+                                }
                                 block
                                 tabIndex={-1}
                               >
